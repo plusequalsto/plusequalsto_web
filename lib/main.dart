@@ -12,8 +12,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Logger logger = Logger();
 void main() async {
   // Set the URL strategy for the app
-  setUrlStrategy(
-      PathUrlStrategy()); // This enables clean URLs without hash fragments
+  usePathUrlStrategy(); // This enables clean URLs without hash fragments
   final router = FluroRouter();
 
   defineRoutes(router);
