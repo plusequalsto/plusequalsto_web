@@ -1,9 +1,9 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:plusequalto_web/screen/contact_screen.dart';
-import 'package:plusequalto_web/screen/home_screen.dart';
-import 'package:plusequalto_web/screen/privacy_policay_screen.dart';
-import 'package:plusequalto_web/screen/terms_and_conditions_screen.dart';
+import 'package:plusequalsto_web/screen/contact_screen.dart';
+import 'package:plusequalsto_web/screen/home_screen.dart';
+import 'package:plusequalsto_web/screen/privacy_policay_screen.dart';
+import 'package:plusequalsto_web/screen/terms_and_conditions_screen.dart';
 
 void defineRoutes(FluroRouter router) {
   router.define(

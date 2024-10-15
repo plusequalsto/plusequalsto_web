@@ -1,18 +1,19 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:plusequalto_web/constants/web_colors.dart';
-import 'package:plusequalto_web/routes/web_router_provider.dart';
-import 'package:plusequalto_web/routes/web_routes.dart';
-import 'package:plusequalto_web/screen/home_screen.dart';
-import 'package:plusequalto_web/utils/custom_snackbar_util.dart';
+import 'package:plusequalsto_web/constants/web_colors.dart';
+import 'package:plusequalsto_web/routes/web_router_provider.dart';
+import 'package:plusequalsto_web/routes/web_routes.dart';
+import 'package:plusequalsto_web/screen/home_screen.dart';
+import 'package:plusequalsto_web/utils/custom_snackbar_util.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Logger logger = Logger();
 void main() async {
   // Set the URL strategy for the app
-  setUrlStrategy(PathUrlStrategy()); // This enables clean URLs without hash fragments
+  setUrlStrategy(
+      PathUrlStrategy()); // This enables clean URLs without hash fragments
   final router = FluroRouter();
 
   defineRoutes(router);
@@ -37,7 +38,7 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Plus Equal To',
+      title: 'Plus Equals To',
       theme: ThemeData(
         scaffoldBackgroundColor: WebColors.primaryColor,
         useMaterial3: true,

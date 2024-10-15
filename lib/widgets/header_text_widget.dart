@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plusequalto_web/constants/web_colors.dart';
+import 'package:plusequalsto_web/constants/web_colors.dart';
 
-Widget textHeaderWidget(
-    String number, double smallHeading, double width, String text, double mediumHeading) {
+Widget textHeaderWidget(String number, double smallHeading, double width,
+    String text, double mediumHeading) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.end,

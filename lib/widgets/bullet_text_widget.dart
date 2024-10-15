@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plusequalto_web/constants/web_colors.dart';
+import 'package:plusequalsto_web/constants/web_colors.dart';
 
 Widget buildBulletPoint(String text, double mediumHeading, double fontSize) {
   return Row(

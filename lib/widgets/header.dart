@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plusequalto_web/constants/web_colors.dart';
+import 'package:plusequalsto_web/constants/web_colors.dart';
 
 class Header extends StatefulWidget {
   final Size screenSize;

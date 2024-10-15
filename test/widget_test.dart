@@ -9,7 +9,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:plusequalto_web/main.dart';
+import 'package:plusequalsto_web/main.dart';
 
 void main() {
   final router = FluroRouter();

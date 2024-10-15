@@ -1,4 +1,4 @@
-# plusequalto_web
+# plusequalsto_web
 
 A new Flutter project.
 

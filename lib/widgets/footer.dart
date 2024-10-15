@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plusequalto_web/constants/web_colors.dart';
-import 'package:plusequalto_web/widgets/clickable_text.dart';
+import 'package:plusequalsto_web/constants/web_colors.dart';
+import 'package:plusequalsto_web/widgets/clickable_text.dart';
 
 class Footer extends StatelessWidget {
   final Size screenSize;

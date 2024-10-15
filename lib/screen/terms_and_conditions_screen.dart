@@ -1,12 +1,12 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plusequalto_web/constants/web_colors.dart';
-import 'package:plusequalto_web/widgets/bullet_text_widget.dart';
-import 'package:plusequalto_web/widgets/footer.dart';
-import 'package:plusequalto_web/widgets/header.dart';
-import 'package:plusequalto_web/widgets/left_widget.dart';
-import 'package:plusequalto_web/widgets/right_widget.dart';
+import 'package:plusequalsto_web/constants/web_colors.dart';
+import 'package:plusequalsto_web/widgets/bullet_text_widget.dart';
+import 'package:plusequalsto_web/widgets/footer.dart';
+import 'package:plusequalsto_web/widgets/header.dart';
+import 'package:plusequalsto_web/widgets/left_widget.dart';
+import 'package:plusequalsto_web/widgets/right_widget.dart';
 
 class TermsAndConditionsScreen extends StatefulWidget {
   final FluroRouter router;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plusequalto_web/widgets/custom_snackbar.dart';
+import 'package:plusequalsto_web/widgets/custom_snackbar.dart';
 
 class CustomSnackBarUtil {
   static final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
