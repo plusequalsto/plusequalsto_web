@@ -1,6 +1,6 @@
 {
   "root": "build/web",
-  "clean_urls": true,
+  "clean_urls": false,
   "routes": {
     "/**": "index.html"
   }
