@@ -6,10 +6,13 @@ import 'package:plusequalto_web/routes/web_router_provider.dart';
 import 'package:plusequalto_web/routes/web_routes.dart';
 import 'package:plusequalto_web/screen/home_screen.dart';
 import 'package:plusequalto_web/utils/custom_snackbar_util.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Logger logger = Logger();
 void main() async {
+  // Set the URL strategy for the app
+  setUrlStrategy(PathUrlStrategy()); // This enables clean URLs without hash fragments
   final router = FluroRouter();
 
   defineRoutes(router);
