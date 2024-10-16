@@ -1,21 +1,20 @@
 {
   "name": "plusequalsto_web",
   "version": "1.0.0",
-  "description": "plusequalsto_web",
+  "description": "A new Flutter project.",
   "main": "server.js",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "start": "node server.js",
-    "heroku-postbuild": "flutter build web --release"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.21.1"
   },
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "author": "",
   "license": "ISC"
