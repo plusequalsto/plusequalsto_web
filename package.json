@@ -1,7 +1,7 @@
 {
   "name": "plusequalsto_web",
   "version": "1.0.0",
-  "description": "A new Flutter project.",
+  "description": "plusequalsto_web",
   "main": "server.js",
   "directories": {
     "lib": "lib",
