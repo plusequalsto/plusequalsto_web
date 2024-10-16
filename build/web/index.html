@@ -21,13 +21,25 @@
   <title>Plus Equals To</title>
   <link rel="manifest" href="manifest.json">
 
+  <!-- Single canonical tag, adjusted as needed -->
   <link rel="canonical" href="https://www.plusequalsto.com" />
-  <link rel="canonical" href="https://www.plusequalsto.com/contact" />
-  <link rel="canonical" href="https://www.plusequalsto.com/privacy_policy" />
-  <link rel="canonical" href="https://www.plusequalsto.com/terms_and_conditions" />
 </head>
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    // Example function to set the canonical link dynamically
+    function setCanonical(url) {
+      const link = document.querySelector("link[rel='canonical']");
+      if (link) {
+        link.setAttribute('href', url);
+      }
+    }
+
+    // Call this function based on your app's routing
+    const currentPath = window.location.pathname; // Get current path
+    const canonicalUrl = `https://www.plusequalsto.com${currentPath}`;
+    setCanonical(canonicalUrl);
+  </script>
 </body>
 </html>
