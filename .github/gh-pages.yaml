@@ -28,6 +28,11 @@ jobs:
       - name: Build Web
         run: flutter build web --release
 
+      - name: Set Git user
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
       - name: Deploy to Heroku
         run: git push https://HEROKU_API_KEY@git.heroku.com/plusequalsto_web.git main
         env:
