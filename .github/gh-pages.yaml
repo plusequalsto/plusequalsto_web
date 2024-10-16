@@ -28,9 +28,9 @@ jobs:
       - name: Build Web
         run: flutter build web --release
 
-      - name: Install Heroku CLI
+      - name: Copy to /app Directory
         run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
+          cp -r ./build/web/* /app/
 
       - name: Heroku Action
         # You may pin to the exact commit or the version.
