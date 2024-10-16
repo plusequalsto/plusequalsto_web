@@ -1,4 +1,4 @@
-name: Deploy to Heroku
+name: Main
 
 on:
   push:
@@ -10,23 +10,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Clone repository
         uses: actions/checkout@v3
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.22.1'
+          flutter-version: '3.24.1'
 
       - name: Enable Web
         run: flutter config --enable-web
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: flutter pub get
 
       - name: Build Web
         run: flutter build web --release
 
-      - name: Deploy to Heroku
-        run: git push https://${{ secrets.HEROKU_API_KEY }}@git.heroku.com/plusequalsto-web.git main
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+
+      - name: Heroku Action
+        # You may pin to the exact commit or the version.
+        # uses: CDNievas/heroku-action@c9cf9c85571e67583e44ec92c0d1113f66b0e838
+        uses: CDNievas/heroku-action@v1.0
+        with:
+          # Used for authentication. You can find it in your heroku homepage account settings
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: devops@plusequalsto.com
+          heroku_app_name: plusequalsto-web
