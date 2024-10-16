@@ -1,6 +1,6 @@
 {
-    "name": "plusequalto_web",
-    "short_name": "plusequalto_web",
+    "name": "Plus Equals To",
+    "short_name": "plusequalsto_web",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
