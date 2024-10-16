@@ -8,13 +8,9 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "flutter build web --release"
   },
-  "buildpacks": [
-    {
-      "url": "ee/heroku-buildpack-flutter-light"
-    }
-  ],
   "dependencies": {
     "express": "^4.21.1"
   },

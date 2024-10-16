@@ -1,1 +1,1 @@
-web: flutter build web --release && npm start
+web: npm start
