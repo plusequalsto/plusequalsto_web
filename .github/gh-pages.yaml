@@ -32,12 +32,12 @@ jobs:
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
 
-      - name: Log in to Heroku
-        run: heroku auth:token
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-
-      - name: Deploy to Heroku
-        run: |
-          heroku git:remote -a plusequalsto-web
-          git push heroku main
+      - name: Heroku Action
+        # You may pin to the exact commit or the version.
+        # uses: CDNievas/heroku-action@c9cf9c85571e67583e44ec92c0d1113f66b0e838
+        uses: CDNievas/heroku-action@v1.0
+        with:
+          # Used for authentication. You can find it in your heroku homepage account settings
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: devops@plusequalsto.com
+          heroku_app_name: plusequalsto-web
