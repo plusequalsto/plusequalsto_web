@@ -1,4 +1,4 @@
-name: Main
+name: Deploy to Heroku
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Set up Flutter
@@ -22,22 +22,11 @@ jobs:
       - name: Enable Web
         run: flutter config --enable-web
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: flutter pub get
 
       - name: Build Web
         run: flutter build web --release
 
-      - name: Install Heroku CLI
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
-
-      - name: Log in to Heroku
-        run: heroku auth:token
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-
       - name: Deploy to Heroku
-        run: |
-          heroku git:remote -a plusequalsto-web
-          git push heroku main
+        run: git push https://${{ secrets.HEROKU_API_KEY }}@git.heroku.com/plusequalsto-web.git main
