@@ -26,7 +26,7 @@ class _HeaderState extends State<Header> {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildMenuItem(context, 'Tesst', '/services', [
+          _buildMenuItem(context, 'Services', '/services', [
             {'title': 'Consulting', 'route': '/consulting'},
             {'title': 'Development', 'route': '/development'}
           ]),
