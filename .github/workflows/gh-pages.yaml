@@ -30,7 +30,8 @@ jobs:
 
       - name: Copy to /app Directory
         run: |
-          cp -r ./build/web/* /app
+          mkdir -p /app
+          cp -r ./build/web/* /app/
 
       - name: Heroku Action
         # You may pin to the exact commit or the version.
