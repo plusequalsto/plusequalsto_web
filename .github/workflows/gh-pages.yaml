@@ -28,9 +28,7 @@ jobs:
       - name: Build Web
         run: flutter build web --release
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/main'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
+      - name: Deploy to Heroku
+        run: git push https://HEROKU_API_KEY@git.heroku.com/plusequalsto-web.git main
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
