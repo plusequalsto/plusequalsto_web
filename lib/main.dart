@@ -5,6 +5,7 @@ import 'package:plusequalsto_web/constants/web_colors.dart';
 import 'package:plusequalsto_web/routes/web_router_provider.dart';
 import 'package:plusequalsto_web/routes/web_routes.dart';
 import 'package:plusequalsto_web/screen/home_screen.dart';
+import 'package:plusequalsto_web/screen/sitemap.dart';
 import 'package:plusequalsto_web/utils/custom_snackbar_util.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'dart:html' as html;
@@ -18,6 +19,24 @@ void main() async {
   final router = FluroRouter();
 
   defineRoutes(router);
+
+  final sitemap = Sitemap([
+    'https://plusequalsto.com/',
+    'https://plusequalsto.com/contact',
+    'https://plusequalsto.com/privacy_policy',
+    'https://plusequalsto.com/terms_and_conditions',
+    // Add more URLs as needed
+  ]);
+
+  final sitemapXml = sitemap.generateSitemap();
+
+  // Define a route to serve the sitemap
+  router.define('/sitemap.xml', handler: Handler(handlerFunc: (context, parameters) {
+    // Serve the sitemap XML
+    html.document.body!.appendHtml('<pre>$sitemapXml</pre>');
+    return Container(); // Return an empty widget
+  }));
+
   runApp(
     WebRouterProvider(
       router: router,
