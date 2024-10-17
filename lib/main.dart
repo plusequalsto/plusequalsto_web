@@ -43,9 +43,12 @@ class _MainState extends State<Main> {
     checkCookie();
   }
 
-  void checkCookie() {
+  void checkCookie() async {
     const cookieName = 'hasVisited';
     final cookieValue = html.document.cookie;
+
+    // Delay for 2 seconds (2000 milliseconds) before checking the cookie
+    await Future.delayed(const Duration(seconds: 4));
 
     // Check if the cookie already exists
     if (!cookieValue!.contains(cookieName)) {
@@ -66,6 +69,15 @@ class _MainState extends State<Main> {
     // Set the cookie for future visits
     html.document.cookie =
         'hasVisited=true; max-age=${30 * 24 * 60 * 60}'; // 30 days
+  }
+
+  void declineCookies() {
+    setState(() {
+      _showCookieNotice = false;
+    });
+    // Optionally set a cookie for declining if needed
+    html.document.cookie =
+        'hasVisited=false; max-age=${30 * 24 * 60 * 60}'; // 30 days
   }
 
   @override
@@ -119,9 +131,38 @@ class _MainState extends State<Main> {
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              TextButton(
-                onPressed: acceptCookies,
-                child: const Text('Accept'),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: declineCookies,
+                    style: TextButton.styleFrom(
+                      backgroundColor: WebColors.accentColor,
+                      foregroundColor: WebColors.textPrimary, // Text color
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0), // Padding
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(8.0), // Rounded corners
+                      ),
+                    ),
+                    child: const Text('Decline'),
+                  ),
+                  const SizedBox(width: 8), // Spacing between buttons
+                  TextButton(
+                    onPressed: acceptCookies,
+                    style: TextButton.styleFrom(
+                      backgroundColor: WebColors.primaryColor,
+                      foregroundColor: WebColors.textPrimary, // Text color
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0), // Padding
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(8.0), // Rounded corners
+                      ),
+                    ),
+                    child: const Text('Accept'),
+                  ),
+                ],
               ),
             ],
           ),
