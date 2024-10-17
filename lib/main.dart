@@ -11,6 +11,7 @@ import 'dart:html' as html;
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Logger logger = Logger();
+
 void main() async {
   // Set the URL strategy for the app
   usePathUrlStrategy(); // This enables clean URLs without hash fragments
@@ -43,15 +44,18 @@ class _MainState extends State<Main> {
   }
 
   void checkCookie() {
-    final cookieName = 'hasVisited';
+    const cookieName = 'hasVisited';
     final cookieValue = html.document.cookie;
 
-    if (cookieValue!.contains(cookieName)) {
+    // Check if the cookie already exists
+    if (!cookieValue!.contains(cookieName)) {
       setState(() {
         _showCookieNotice = true;
       });
-      // Set a cookie for 30 days
-      html.document.cookie = '$cookieName=true; max-age=${30 * 24 * 60 * 60}';
+    } else {
+      // If the cookie exists, you can also update its expiration if desired
+      html.document.cookie =
+          '$cookieName=true; max-age=${30 * 24 * 60 * 60}'; // 30 days
     }
   }
 
@@ -59,12 +63,9 @@ class _MainState extends State<Main> {
     setState(() {
       _showCookieNotice = false;
     });
-  }
-
-  void declineCookies() {
-    setState(() {
-      _showCookieNotice = false;
-    });
+    // Set the cookie for future visits
+    html.document.cookie =
+        'hasVisited=true; max-age=${30 * 24 * 60 * 60}'; // 30 days
   }
 
   @override
@@ -112,7 +113,7 @@ class _MainState extends State<Main> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
+              const Expanded(
                 child: Text(
                   'We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of cookies.',
                   style: TextStyle(color: Colors.black),
@@ -120,7 +121,7 @@ class _MainState extends State<Main> {
               ),
               TextButton(
                 onPressed: acceptCookies,
-                child: Text('Accept'),
+                child: const Text('Accept'),
               ),
             ],
           ),
