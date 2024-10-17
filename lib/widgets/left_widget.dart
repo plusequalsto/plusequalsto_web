@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LeftWidget extends StatelessWidget {
   final Size screenSize;
@@ -32,8 +33,8 @@ class LeftWidget extends StatelessWidget {
                     );
                   }
                 },
-                child: Image.asset(
-                  'assets/images/plusequalsto.png', // Path to your background image
+                child: SvgPicture.asset(
+                  'assets/svgs/plusequalsto_logo.svg', // Path to your background image
                   width: screenSize.width < 640 ? 32 : 64,
                 ),
               ),
