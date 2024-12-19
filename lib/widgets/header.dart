@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plusequalsto_web/constants/web_colors.dart';
+import 'package:plusequalsto_web/main.dart';
 
 class Header extends StatefulWidget {
   final Size screenSize;
@@ -81,8 +82,9 @@ class _HeaderState extends State<Header> {
   }
 
   Widget _buildDropdownMenu(List<Map<String, String>> items) {
+    logger.d(widget.screenSize.width * 0.08);
     return AnimatedContainer(
-      width: widget.screenSize.width * 0.08,
+      width: 128,
       height: widget.screenSize.height * 0.16,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,

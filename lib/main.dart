@@ -31,7 +31,8 @@ void main() async {
   final sitemapXml = sitemap.generateSitemap();
 
   // Define a route to serve the sitemap
-  router.define('/sitemap.xml', handler: Handler(handlerFunc: (context, parameters) {
+  router.define('/sitemap.xml',
+      handler: Handler(handlerFunc: (context, parameters) {
     // Serve the sitemap XML
     html.document.body!.appendHtml('<pre>$sitemapXml</pre>');
     return Container(); // Return an empty widget
@@ -112,11 +113,13 @@ class _MainState extends State<Main> {
       navigatorKey: navigatorKey,
       onGenerateRoute: widget.router.generator,
       home: Scaffold(
-        body: Stack(
-          children: [
-            initialNavigation(),
-            if (_showCookieNotice) _buildCookieNotice(),
-          ],
+        body: SelectionArea(
+          child: Stack(
+            children: [
+              initialNavigation(),
+              if (_showCookieNotice) _buildCookieNotice(),
+            ],
+          ),
         ),
       ),
     );
