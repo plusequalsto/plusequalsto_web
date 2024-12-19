@@ -7,6 +7,7 @@ import 'package:plusequalsto_web/widgets/footer.dart';
 import 'package:plusequalsto_web/widgets/header.dart';
 import 'package:plusequalsto_web/widgets/left_widget.dart';
 import 'package:plusequalsto_web/widgets/right_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatefulWidget {
   final FluroRouter router;
@@ -23,27 +24,42 @@ class _ContactScreenState extends State<ContactScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _projectDescriptionController =
-      TextEditingController();
+  final TextEditingController _subjectController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   bool _isEmailValid = true;
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       logger.d('Form is valid');
+      // Trigger the mailto link after successful form validation
+      final String url = Uri.encodeFull(
+        'mailto:contact@plusequalsto.com?subject=${_subjectController.text.trim()}&body=Full Name: ${_fullNameController.text.trim()}\nEmail: ${_emailController.text.trim()}\nDescription: ${_descriptionController.text.trim()}',
+      );
+
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url));
+      } else {
+        CustomSnackBarUtil.showCustomSnackBar('Could not launch email client',
+            success: false);
+      }
     } else {
       if (_fullNameController.text.trim().isEmpty) {
-        CustomSnackBarUtil.showCustomSnackBar('Title can not be empty',
+        CustomSnackBarUtil.showCustomSnackBar('Full name can not be empty',
             success: false);
         return;
       }
       if (_emailController.text.trim().isEmpty) {
-        CustomSnackBarUtil.showCustomSnackBar('Description can not be empty',
+        CustomSnackBarUtil.showCustomSnackBar('Email can not be empty',
             success: false);
         return;
       }
-      if (_projectDescriptionController.text.trim().isEmpty) {
-        CustomSnackBarUtil.showCustomSnackBar(
-            'Project description can not be empty',
+      if (_subjectController.text.trim().isEmpty) {
+        CustomSnackBarUtil.showCustomSnackBar('Subjecy can not be empty',
+            success: false);
+        return;
+      }
+      if (_descriptionController.text.trim().isEmpty) {
+        CustomSnackBarUtil.showCustomSnackBar('Description can not be empty',
             success: false);
         return;
       }
@@ -97,6 +113,10 @@ class _ContactScreenState extends State<ContactScreen> {
                                     child: TextFormField(
                                       controller: _fullNameController,
                                       textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                        color: WebColors
+                                            .textPrimary, // Set your desired text color here
+                                      ),
                                       decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
@@ -136,6 +156,10 @@ class _ContactScreenState extends State<ContactScreen> {
                                     child: TextFormField(
                                       controller: _emailController,
                                       textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                        color: WebColors
+                                            .textPrimary, // Set your desired text color here
+                                      ),
                                       decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
@@ -177,13 +201,60 @@ class _ContactScreenState extends State<ContactScreen> {
                                     ),
                                   ),
                                   SizedBox(height: screenSize.height * 0.01),
+                                  // Email Field
+                                  SizedBox(
+                                    width: screenSize.width *
+                                        0.4, // Set the desired width here
+                                    child: TextFormField(
+                                      controller: _subjectController,
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                        color: WebColors
+                                            .textPrimary, // Set your desired text color here
+                                      ),
+                                      decoration: InputDecoration(
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: WebColors.borderColor,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: WebColors.borderColor,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
+                                        labelText: 'Subject *',
+                                        labelStyle: const TextStyle(
+                                          color: WebColors.textPrimary,
+                                        ),
+                                      ),
+                                      keyboardType: TextInputType.text,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Subject is required';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(height: screenSize.height * 0.01),
                                   // Project Description Field
                                   SizedBox(
                                     width: screenSize.width *
                                         0.4, // Set the desired width here
                                     child: TextFormField(
-                                      controller: _projectDescriptionController,
+                                      controller: _descriptionController,
                                       textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                        color: WebColors
+                                            .textPrimary, // Set your desired text color here
+                                      ),
                                       maxLines: 8,
                                       maxLength: 1000,
                                       decoration: InputDecoration(
@@ -203,7 +274,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                           borderRadius:
                                               BorderRadius.circular(4.0),
                                         ),
-                                        labelText: 'Project description *',
+                                        labelText: 'Description *',
                                         labelStyle: const TextStyle(
                                           color: WebColors.textPrimary,
                                         ),
@@ -215,7 +286,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                       keyboardType: TextInputType.text,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Project description is required';
+                                          return 'Description is required';
                                         }
                                         return null;
                                       },
