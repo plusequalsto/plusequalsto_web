@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:plusequalsto_web/constants/web_colors.dart';
@@ -7,7 +9,7 @@ import 'package:plusequalsto_web/widgets/footer.dart';
 import 'package:plusequalsto_web/widgets/header.dart';
 import 'package:plusequalsto_web/widgets/left_widget.dart';
 import 'package:plusequalsto_web/widgets/right_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class ContactScreen extends StatefulWidget {
   final FluroRouter router;
@@ -29,40 +31,33 @@ class _ContactScreenState extends State<ContactScreen> {
   bool _isEmailValid = true;
 
   void _submitForm() async {
+    logger.d('Submit form');
     if (_formKey.currentState!.validate()) {
-      logger.d('Form is valid');
-      // Trigger the mailto link after successful form validation
-      final String url = Uri.encodeFull(
-        'mailto:contact@plusequalsto.com?subject=${_subjectController.text.trim()}&body=Full Name: ${_fullNameController.text.trim()}\nEmail: ${_emailController.text.trim()}\nDescription: ${_descriptionController.text.trim()}',
+      final url = Uri.parse('http://localhost:4200/sendemail');
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'fullName': _fullNameController.text.trim(),
+          'email': _emailController.text.trim(),
+          'subject': _subjectController.text.trim(),
+          'description': _descriptionController.text.trim(),
+        }),
       );
+      logger.d(response.body);
 
-      if (await canLaunchUrl(Uri.parse(url))) {
-        await launchUrl(Uri.parse(url));
+      if (response.statusCode == 200) {
+        CustomSnackBarUtil.showCustomSnackBar('Email sent successfully',
+            success: true);
       } else {
-        CustomSnackBarUtil.showCustomSnackBar('Could not launch email client',
+        CustomSnackBarUtil.showCustomSnackBar('Failed to send email',
             success: false);
       }
     } else {
-      if (_fullNameController.text.trim().isEmpty) {
-        CustomSnackBarUtil.showCustomSnackBar('Full name can not be empty',
-            success: false);
-        return;
-      }
-      if (_emailController.text.trim().isEmpty) {
-        CustomSnackBarUtil.showCustomSnackBar('Email can not be empty',
-            success: false);
-        return;
-      }
-      if (_subjectController.text.trim().isEmpty) {
-        CustomSnackBarUtil.showCustomSnackBar('Subjecy can not be empty',
-            success: false);
-        return;
-      }
-      if (_descriptionController.text.trim().isEmpty) {
-        CustomSnackBarUtil.showCustomSnackBar('Description can not be empty',
-            success: false);
-        return;
-      }
+      CustomSnackBarUtil.showCustomSnackBar('Please fill out all fields',
+          success: false);
     }
   }
 
@@ -138,6 +133,14 @@ class _ContactScreenState extends State<ContactScreen> {
                                         labelStyle: const TextStyle(
                                           color: WebColors.textPrimary,
                                         ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: WebColors.errorColor,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
                                       ),
                                       keyboardType: TextInputType.text,
                                       validator: (value) {
@@ -180,6 +183,14 @@ class _ContactScreenState extends State<ContactScreen> {
                                         labelText: 'Email *',
                                         labelStyle: const TextStyle(
                                           color: WebColors.textPrimary,
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: WebColors.errorColor,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
                                         ),
                                       ),
                                       keyboardType: TextInputType.emailAddress,
@@ -233,6 +244,14 @@ class _ContactScreenState extends State<ContactScreen> {
                                         labelStyle: const TextStyle(
                                           color: WebColors.textPrimary,
                                         ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: WebColors.errorColor,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
                                       ),
                                       keyboardType: TextInputType.text,
                                       validator: (value) {
@@ -282,6 +301,14 @@ class _ContactScreenState extends State<ContactScreen> {
                                           color: WebColors.textPrimary,
                                         ),
                                         alignLabelWithHint: true,
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: WebColors.errorColor,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
                                       ),
                                       keyboardType: TextInputType.text,
                                       validator: (value) {
