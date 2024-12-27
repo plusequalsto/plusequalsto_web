@@ -20,7 +20,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'web', 'index.html'));
 });
 
-app.post('/sendemail', async (req, res) => {
+app.post('/api/sendemail', async (req, res) => {
     const { fullName, email, subject, description } = req.body;
 
     const mailOptions = {

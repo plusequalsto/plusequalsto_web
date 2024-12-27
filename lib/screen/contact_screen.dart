@@ -33,7 +33,7 @@ class _ContactScreenState extends State<ContactScreen> {
   void _submitForm() async {
     logger.d('Submit form');
     if (_formKey.currentState!.validate()) {
-      final url = Uri.parse('http://www.plusequalsto.com:4200/sendemail');
+      final url = Uri.parse('/api/sendemail');
       final response = await http.post(
         url,
         headers: {
