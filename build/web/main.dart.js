@@ -81626,7 +81626,7 @@ p.e=!0
 p.LZ()
 s=p.jR()?2:4
 break
-case 2:o=A.fu("http://www.plusequalsto.com:4200/sendemail",0,null)
+case 2:o=A.fu("/api/sendemail",0,null)
 p=t.N
 n=A.ax(["Content-Type","application/json"],p,p)
 s=5
